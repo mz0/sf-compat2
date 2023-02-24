@@ -1,0 +1,28 @@
+image: ${SHSHA_DOCKER_REGISTRY}/openjdk8-plus-db-cli-utils
+stages:
+  - build
+cache:
+  key: global
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - ./gradlew build -PbuildNumber=$CI_PIPELINE_IID -PshortRevision=$CI_COMMIT_SHORT_SHA
+  artifacts:
+    paths:
+      - "build/reports/"
+    expire_in: 1 day
+    reports:
+      junit:
+        - "**/build/test-results/test/TEST-*.xml"
+  only:
+    - main
+    - nogen
+    - /^feature\/.+$/
