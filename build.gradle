@@ -56,6 +56,14 @@ configurations {
 }
 
 dependencies {
+    if (JavaVersion.current().isJava11()) {
+        logger.warn("Java 11 build support is experimental.")
+        compileOnly "javax.xml.bind:jaxb-api:2.3.1"
+        implementation "org.glassfish.jaxb:jaxb-runtime:2.3.8"  // TODO not implementation
+    } else if (!JavaVersion.current().isJava8()) {
+        logger.error("Incompatible Java version: ${JavaVersion.current()}")
+        throw new GradleException("need Java 8 or 11")
+    }
     jamon 'org.jamon:jamon-anttask:2.4.2'
 
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.1.3'
