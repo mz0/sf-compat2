@@ -25,6 +25,9 @@ repositories {
    mavenCentral()
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 ext {
   srcDir     = file('src')
   mainDir    = file("${srcDir}/main")
@@ -51,7 +54,6 @@ sourceSets {
 }
 
 configurations {
-    jamon
     jaxb
 }
 
@@ -64,18 +66,16 @@ dependencies {
         logger.error("Incompatible Java version: ${JavaVersion.current()}")
         throw new GradleException("need Java 8 or 11")
     }
-    jamon 'org.jamon:jamon-anttask:2.4.2'
 
-    jaxb 'com.sun.xml.bind:jaxb-xjc:2.1.3'
     jaxb 'javax.xml:jsr173:1.0'
     jaxb 'javax.activation:activation:1.1.1'
 
-    implementation 'com.exactpro.mina:apache-mina-core:2.0.21.2'
-
+    api 'com.exactpro.mina:apache-mina-core:2.0.21.2' // TODO ?
     implementation 'org.jamon:jamon-runtime:2.4.1'
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.2"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.2"
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.12.2"
+    def jacksonVer = '2.14.2'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVer"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVer"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVer"
     implementation 'commons-codec:commons-codec:1.15'
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
@@ -94,20 +94,3 @@ dependencies {
     testImplementation "com.fasterxml.jackson.core:jackson-databind:2.14.1"
     testImplementation 'com.thoughtworks.xstream:xstream:1.4.20'
 }
-
-tasks.register('templates') {
-    doLast {
-      ant.taskdef(name: 'jamon', classname: 'org.jamon.ant.JamonTask',   classpath: configurations.jamon.asPath)
-      ant.taskdef(name: 'xjc',   classname: 'com.sun.tools.xjc.XJCTask', classpath: configurations.jaxb.asPath)
-      ant.jamon(destdir: "${genJavaDir}", srcdir: "${templatesDir}")
-      ant.xjc(schema: "${xsdDir}/dictionary.xsd",
-              destdir: "${genJavaDir}",
-              package: "com.exactpro.sf.common.impl.messages.xml.configuration", removeOldOutput: "yes"
-      ) {
-        produces(dir: "${genJavaDir}/com/exactpro/common/sf/impl/messages/xml/configuration", includes: "*")
-        arg(value: "-extension")
-      }
-    }
-}
-
-compileKotlin.dependsOn.add("templates")

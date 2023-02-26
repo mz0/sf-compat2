@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	 http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,38 +41,36 @@ import javax.xml.validation.SchemaFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.time.format.DateTimeFormatter;
 
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import com.exactpro.sf.common.util.EPSCommonException;
-import com.exactpro.sf.util.DateTimeUtility;
 
 public class XMLTransmitter {
 
 	private static final Logger logger = LoggerFactory.getLogger(XMLTransmitter.class);
 
 	private static final XMLTransmitter instance = new XMLTransmitter();
-    public static final String PROPRIETARY_COPYRIGHT =
-            "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n"
-            + "  ~ Copyright (c) 2009-" + DateTimeFormatter.ofPattern("yyyy").format(DateTimeUtility.nowLocalDate()) + ", Exactpro Systems LLC\r\n"
-            + "  ~ www.exactpro.com\r\n"
-            + "  ~ Build Software to Test Software\r\n" + "  ~ \r\n" + "  ~ All rights reserved.\r\n"
-            + "  ~ This is unpublished, licensed software, confidential and proprietary\r\n"
-            + "  ~ information which is the property of Exactpro Systems LLC or its licensors.\r\n"
-            + "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n";
+	public static final String PROPRIETARY_COPYRIGHT =
+		"  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n"
+		+ "  ~ Copyright (c) 2009-2019, Exactpro Systems LLC\r\n"
+		+ "  ~ www.exactpro.com\r\n"
+		+ "  ~ Build Software to Test Software\r\n" + "  ~ \r\n" + "  ~ All rights reserved.\r\n"
+		+ "  ~ This is unpublished, licensed software, confidential and proprietary\r\n"
+		+ "  ~ information which is the property of Exactpro Systems LLC or its licensors.\r\n"
+		+ "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n";
 
-    private final Map<Package, JAXBContext> contexts = new HashMap<>();
+	private final Map<Package, JAXBContext> contexts = new HashMap<>();
 
 	private XMLTransmitter(){}
 
 	private <T> JAXBContext getContext(Class<T> tclass) throws Exception {
 		JAXBContext context;
 		Package pack = tclass.getPackage();
-		if(contexts.containsKey(pack)){
-            return contexts.get(pack);
-		}else{
+		if (contexts.containsKey(pack)) {
+			return contexts.get(pack);
+		} else {
 			context = JAXBContext.newInstance(pack.getName());
 			contexts.put(pack, context);
 		}
@@ -87,11 +85,10 @@ public class XMLTransmitter {
 			ValidationEventLocator vel = ve.getLocator();
 			Node  node = vel.getNode();
 
-			String name = node!=null?node.getLocalName():"null";
+			String name = (node != null) ? node.getLocalName() : "null";
 			logger.error(  "node  : {}.{}: {}", name, vel.getOffset(), msg );
 			return false;
 		}
-
 	}
 
 	private static class ValidationEventReadHandler implements ValidationEventHandler{
@@ -103,11 +100,10 @@ public class XMLTransmitter {
 			logger.error(  "location  : {}.{}: {}", vel.getLineNumber(), vel.getColumnNumber(), msg );
 			return false;
 		}
-
 	}
 
 	public <T> void marshal(T instance, File xmlFile, File schemaFile) throws JAXBException {
-		Schema schema = null;
+		Schema schema;
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = schemaFactory.newSchema(schemaFile);
@@ -138,9 +134,9 @@ public class XMLTransmitter {
 		marshaller.marshal(instance, xmlFile);
 	}
 
-    @SuppressWarnings("unchecked")
-    public <T> T unmarshal(Class<T> tclass, File xmlFile, File schemaFile) throws JAXBException {
-		Schema schema = null;
+	@SuppressWarnings("unchecked")
+	public <T> T unmarshal(Class<T> tclass, File xmlFile, File schemaFile) throws JAXBException {
+		Schema schema;
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = schemaFactory.newSchema(schemaFile);
@@ -152,27 +148,27 @@ public class XMLTransmitter {
 		try {
 			unmarshaller = getContext(tclass).createUnmarshaller();
 		} catch (Exception e) {
-			throw new EPSCommonException("An unmarshaller instance could not be created for class " + tclass.getCanonicalName(),e);
+			throw new EPSCommonException("un-marshaller instance could not be created for class " + tclass.getCanonicalName(),e);
 		}
 		unmarshaller.setSchema(schema);
 		unmarshaller.setEventHandler(new ValidationEventReadHandler());
 		return (T)unmarshaller.unmarshal(xmlFile);
 	}
 
-    @SuppressWarnings("unchecked")
-    public <T> T unmarshal(Class<T> tclass, File xmlFile) throws JAXBException {
+	@SuppressWarnings("unchecked")
+	public <T> T unmarshal(Class<T> tclass, File xmlFile) throws JAXBException {
 		Unmarshaller unmarshaller;
 		try {
 			unmarshaller = getContext(tclass).createUnmarshaller();
 		} catch (Exception e) {
-			throw new EPSCommonException("An unmarshaller instance could not be created for class " + tclass.getCanonicalName(),e);
+			throw new EPSCommonException("un-marshaller instance could not be created for class " + tclass.getCanonicalName(),e);
 		}
 		return (T)unmarshaller.unmarshal(xmlFile);
 	}
 
-    @SuppressWarnings("unchecked")
-    public <T> T unmarshal(Class<T> tclass, InputStream input, File schemaFile) throws JAXBException {
-		Schema schema = null;
+	@SuppressWarnings("unchecked")
+	public <T> T unmarshal(Class<T> tclass, InputStream input, File schemaFile) throws JAXBException {
+		Schema schema;
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = schemaFactory.newSchema(schemaFile);
@@ -184,20 +180,20 @@ public class XMLTransmitter {
 		try {
 			unmarshaller = getContext(tclass).createUnmarshaller();
 		} catch (Exception e) {
-			throw new EPSCommonException("An unmarshaller instance could not be created for class " + tclass.getCanonicalName(),e);
+			throw new EPSCommonException("un-marshaller instance could not be created for class " + tclass.getCanonicalName(),e);
 		}
 		unmarshaller.setSchema(schema);
 		return (T)unmarshaller.unmarshal(input);
 	}
 
-    @SuppressWarnings("unchecked")
-    public <T> T unmarshal(Class<T> tclass, InputStream input, InputStream schemaInput, Listener listener) throws JAXBException {
-		Schema schema = null;
+	@SuppressWarnings("unchecked")
+	public <T> T unmarshal(Class<T> tclass, InputStream input, InputStream schemaInput, Listener listener) throws JAXBException {
+		Schema schema;
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = schemaFactory.newSchema(new StreamSource(schemaInput));
 		} catch (SAXException e) {
-			throw new EPSCommonException("A schema file could not be parsed.", e);
+			throw new EPSCommonException("schema file could not be parsed.", e);
 		}
 
 		Unmarshaller unmarshaller;
@@ -205,25 +201,25 @@ public class XMLTransmitter {
 			unmarshaller = getContext(tclass).createUnmarshaller();
 			unmarshaller.setListener(listener);
 		} catch (Exception e) {
-			throw new EPSCommonException("An unmarshaller instance could not be created for class " + tclass.getCanonicalName(),e);
+			throw new EPSCommonException("un-marshaller instance could not be created for class " + tclass.getCanonicalName(),e);
 		}
 		unmarshaller.setSchema(schema);
 		return (T)unmarshaller.unmarshal(input);
 	}
 
-    @SuppressWarnings("unchecked")
-    public <T> T unmarshal(Class<T> tclass, InputStream input) throws JAXBException {
+	@SuppressWarnings("unchecked")
+	public <T> T unmarshal(Class<T> tclass, InputStream input) throws JAXBException {
 		Unmarshaller unmarshaller;
 		try {
 			unmarshaller = getContext(tclass).createUnmarshaller();
 		} catch (Exception e) {
-			throw new EPSCommonException("An unmarshaller instance could not be created for class " + tclass.getCanonicalName(),e);
+			throw new EPSCommonException("un-marshaller instance could not be created for class " + tclass.getCanonicalName(),e);
 		}
 		return (T)unmarshaller.unmarshal(input);
 	}
 
 	public <T> void marshal(T instance, OutputStream output, File schemaFile) throws JAXBException {
-		Schema schema = null;
+		Schema schema;
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = schemaFactory.newSchema(schemaFile);
@@ -235,7 +231,7 @@ public class XMLTransmitter {
 		try {
 			marshaller = getContext(instance.getClass()).createMarshaller();
 		} catch (Exception e) {
-			throw new EPSCommonException("A marshaller instance could not be created for class " + instance.getClass().getCanonicalName(),e);
+			throw new EPSCommonException("marshaller instance could not be created for class " + instance.getClass().getCanonicalName(),e);
 		}
 
 		writeCopyright(output);
@@ -247,7 +243,7 @@ public class XMLTransmitter {
 		marshaller.marshal(instance, output);
 	}
 
-    public <T> void marshal(T instance, OutputStream output) throws JAXBException {
+	public <T> void marshal(T instance, OutputStream output) throws JAXBException {
 
 		Marshaller marshaller;
 		try {
@@ -264,24 +260,20 @@ public class XMLTransmitter {
 		return instance;
 	}
 
-    /**
-     * @param output
-     * @throws FactoryConfigurationError
-     */
-    private void writeCopyright(OutputStream output) throws FactoryConfigurationError {
-        try {
-    	    XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newFactory();
-    	    XMLStreamWriter xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(output);//;
-    	    try {
-    	        xmlStreamWriter.writeStartDocument(Charset.defaultCharset().name(), "1.0");
-    	        xmlStreamWriter.writeCharacters("\r\n");
-    	        xmlStreamWriter.writeComment("\r\n" + PROPRIETARY_COPYRIGHT);
-    	    } finally {
-    	        xmlStreamWriter.flush();
-                xmlStreamWriter.close();
-    	    }
-    	} catch (XMLStreamException e) {
-    	    throw new EPSCommonException("A XML stream writer instance could not be created", e);
-    	}
-    }
+	private void writeCopyright(OutputStream output) throws FactoryConfigurationError {
+		try {
+			XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newFactory();
+			XMLStreamWriter xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(output);
+			try {
+				xmlStreamWriter.writeStartDocument(Charset.defaultCharset().name(), "1.0");
+				xmlStreamWriter.writeCharacters("\r\n");
+				xmlStreamWriter.writeComment("\r\n" + PROPRIETARY_COPYRIGHT);
+			} finally {
+				xmlStreamWriter.flush();
+				xmlStreamWriter.close();
+			}
+		} catch (XMLStreamException e) {
+			throw new EPSCommonException("cannot create XML stream writer instance", e);
+		}
+	}
 }

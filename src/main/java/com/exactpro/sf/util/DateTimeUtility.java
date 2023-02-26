@@ -74,7 +74,6 @@ public class DateTimeUtility {
     /**
      * Convert TemporalAccessor to LocalDateTime
      * 
-     * @param temporal
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(TemporalAccessor temporal) {
@@ -85,7 +84,6 @@ public class DateTimeUtility {
     /**
      * Convert java.util.Date to LocalDateTime in UTC time zone
      * 
-     * @param date
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(Date date) {
@@ -96,7 +94,6 @@ public class DateTimeUtility {
     /**
      * Convert java.sql.Timestamp to LocalDateTime in UTC time zone
      * 
-     * @param date
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(Timestamp timestamp) {
@@ -106,7 +103,6 @@ public class DateTimeUtility {
 
     /**
      * Convert milliseconds to LocalDateTime in UTC time zone
-     * @param millisecond
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(long millisecond) {
@@ -116,8 +112,6 @@ public class DateTimeUtility {
     /**
      * Convert milliseconds and nanosecond to LocalDateTime in UTC time zone
      * 
-     * @param millisecond
-     * @param nanosecond
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(long millisecond, int nanosecond) {
@@ -127,8 +121,6 @@ public class DateTimeUtility {
     /**
      * Merge a LocalTime and a LocalDate to a LocalDateTime in UTC time zone
      *
-     * @param millisecond
-     * @param nanosecond
      * @return LocalDateTime (UTC)
      */
     public static LocalDateTime toLocalDateTime(LocalDate date, LocalTime time) {
@@ -139,7 +131,6 @@ public class DateTimeUtility {
     /**
      * Convert TemporalAccessor to LocalDate
      * 
-     * @param temporalAccessor
      * @return LocalDate (UTC)
      */
     public static LocalDate toLocalDate(TemporalAccessor temporal) {
@@ -150,7 +141,6 @@ public class DateTimeUtility {
     /**
      * Convert java.util.Date to LocalDate in UTC time zone
      * 
-     * @param date
      * @return LocalDate (UTC)
      */
     public static LocalDate toLocalDate(Date date) {
@@ -160,7 +150,6 @@ public class DateTimeUtility {
     /**
      * Convert java.sql.Timestamp to LocalDate in UTC time zone
      * 
-     * @param date
      * @return LocalDate (UTC)
      */
     public static LocalDate toLocalDate(Timestamp timestamp) {
@@ -170,7 +159,6 @@ public class DateTimeUtility {
     /**
      * Convert milliseconds to LocalDate in UTC time zone
      * 
-     * @param millisecond
      * @return LocalDate (UTC)
      */
     public static LocalDate toLocalDate(long millisecond) {
@@ -180,7 +168,6 @@ public class DateTimeUtility {
     /**
      * Convert TemporalAccessor to LocalTime
      * 
-     * @param date
      * @return LocalTime (UTC)
      */
     public static LocalTime toLocalTime(TemporalAccessor temporal) {
@@ -191,7 +178,6 @@ public class DateTimeUtility {
     /**
      * Convert java.util.Date to LocalTime in UTC time zone
      * 
-     * @param date
      * @return LocalTime (UTC)
      */
     public static LocalTime toLocalTime(Date date) {
@@ -201,7 +187,6 @@ public class DateTimeUtility {
     /**
      * Convert java.sql.Timestamp to LocalTime in UTC time zone
      * 
-     * @param date
      * @return LocalTime (UTC)
      */
     public static LocalTime toLocalTime(Timestamp timestamp) {
@@ -211,7 +196,6 @@ public class DateTimeUtility {
     /**
      * Convert milliseconds to LocalTime in UTC time zone
      * 
-     * @param millisecond
      * @return LocalTime (UTC)
      */
     public static LocalTime toLocalTime(long millisecond) {
@@ -221,8 +205,6 @@ public class DateTimeUtility {
     /**
      * Convert milliseconds and nanosecond to LocalTime in UTC time zone
      * 
-     * @param millisecond
-     * @param nanosecond
      * @return LocalTime (UTC)
      */
     public static LocalTime toLocalTime(long millisecond, int nanosecond) {
@@ -232,7 +214,6 @@ public class DateTimeUtility {
     /**
      * Convert TemporalAccessor to java.util.Date
      * 
-     * @param localDateTime
      * @return java.util.Date
      */
     public static Date toDate(TemporalAccessor temporalAccessor) {
@@ -242,7 +223,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalDateTime to java.util.Date
      * 
-     * @param localDateTime
      * @return java.util.Date
      */
     public static Date toDate(LocalDateTime localDateTime) {
@@ -253,7 +233,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalDate to java.util.Date
      * 
-     * @param localDate
      * @return java.util.Date
      */
     public static Date toDate(LocalDate localDate) {
@@ -264,7 +243,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalTime to java.util.Date
      * 
-     * @param localTime
      * @return java.util.Date
      */
     public static Date toDate(LocalTime localTime) {
@@ -274,7 +252,6 @@ public class DateTimeUtility {
     /**
      * Convert TemporalAccessor to java.sql.Timestamp
      * 
-     * @param localDateTime
      * @return java.sql.Timestamp
      */
     public static Timestamp toTimestamp(TemporalAccessor temporalAccessor) {
@@ -284,7 +261,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalDateTime to java.sql.Timestamp
      * 
-     * @param localDateTime
      * @return java.sql.Timestamp
      */
     public static Timestamp toTimestamp(LocalDateTime localDateTime) {
@@ -295,7 +271,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalDate to java.sql.Timestamp
      * 
-     * @param localDate
      * @return java.sql.Timestamp
      */
     public static Timestamp toTimestamp(LocalDate localDate) {
@@ -306,7 +281,6 @@ public class DateTimeUtility {
     /**
      * Convert LocalTime to java.sql.Timestamp
      * 
-     * @param localTime
      * @return java.sql.Timestamp
      */
     public static Timestamp toTimestamp(LocalTime localTime) {
@@ -315,9 +289,6 @@ public class DateTimeUtility {
 
     /**
      * Create ZonedDateTime in specified zone id 
-     * 
-     * @param zoneId
-     * @return
      */
     public static ZonedDateTime nowZonedDateTime(String zoneId) {
         return ZonedDateTime.now(ZoneId.of(zoneId));
@@ -362,7 +333,6 @@ public class DateTimeUtility {
     /**
      * Get millisecond from LocalDateTime in UTC time zone
      * 
-     * @param localDateTime
      * @return the number of milliseconds since the epoch of
      *         1970-01-01T00:00:00Z
      */
@@ -373,7 +343,6 @@ public class DateTimeUtility {
     /**
      * Get millisecond from LocalDate in UTC time zone
      * 
-     * @param localDate
      * @return the number of milliseconds since the epoch of
      *         1970-01-01T00:00:00Z
      */
@@ -384,7 +353,6 @@ public class DateTimeUtility {
     /**
      * Get second from LocalDateTime in UTC time zone
      *
-     * @param localDateTime
      * @return the number of seconds since the epoch of
      *         1970-01-01T00:00:00Z
      */
@@ -396,7 +364,6 @@ public class DateTimeUtility {
     /**
      * Get second from LocalDateTime in UTC time zone
      *
-     * @param localDate
      * @return the number of seconds since the epoch of
      *         1970-01-01T00:00:00Z
      */
@@ -406,9 +373,6 @@ public class DateTimeUtility {
 
     /**
      * Create DateTimeFormatter with UTC time zone
-     * 
-     * @param pattern
-     * @return
      */
     public static DateTimeFormatter createFormatter(String pattern) {
         return DateTimeFormatter.ofPattern(pattern).withZone(ZoneOffset.UTC);
