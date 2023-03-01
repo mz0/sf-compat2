@@ -28,35 +28,6 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext {
-  srcDir     = file('src')
-  mainDir    = file("${srcDir}/main")
-  mainResDir = file("${mainDir}/resources")
-  genDir     = file("${srcDir}/gen")
-  genJavaDir = file("${genDir}/java")
-  genResDir  = file("${genDir}/resources")
-  templatesDir   = "${mainDir}/templates"
-  xsdDir      = "${mainResDir}/xsd"
-  providedDir = file("${srcDir}/provided")
-  providedResDir = file("${providedDir}/resources/")
-}
-
-sourceSets {
-  main {
-    java {
-      srcDir genJavaDir
-    }
-    resources {
-      srcDir genResDir
-      srcDir providedResDir
-    }
-  }
-}
-
-configurations {
-    jaxb
-}
-
 dependencies {
     if (JavaVersion.current().isJava11()) {
         logger.warn("Java 11 build support is experimental.")
@@ -67,30 +38,25 @@ dependencies {
         throw new GradleException("need Java 8 or 11")
     }
 
-    jaxb 'javax.xml:jsr173:1.0'
-    jaxb 'javax.activation:activation:1.1.1'
+    api('com.exactpro.mina:apache-mina-core:2.0.21.2')
 
-    api 'com.exactpro.mina:apache-mina-core:2.0.21.2' // TODO ?
     implementation 'org.jamon:jamon-runtime:2.4.1'
     def jacksonVer = '2.14.2'
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVer"
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVer")
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVer"
-    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVer"
+    api("com.fasterxml.jackson.core:jackson-databind:$jacksonVer")
     implementation 'commons-codec:commons-codec:1.15'
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
-    implementation 'commons-io:commons-io:2.11.0'
+    api('commons-io:commons-io:2.11.0')
     implementation 'net.sourceforge.javacsv:javacsv:2.0'
 
     // For services/codecs/CodecMessageFilter.java (from sailfish-core)
-    implementation 'com.google.guava:guava:30.1-jre'
-    implementation("org.apache.commons:commons-collections4:4.4")
+    api('com.google.guava:guava:30.1-jre')
+    api("org.apache.commons:commons-collections4:4.4")
 
     compileOnly "org.apache.logging.log4j:log4j-core:2.19.0"
     compileOnly "com.google.code.findbugs:jsr305:3.0.2" // import javax.annotation.concurrent.ThreadSafe
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'com.google.guava:guava:30.1-jre'
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.14.1"
-    testImplementation 'com.thoughtworks.xstream:xstream:1.4.20'
 }
