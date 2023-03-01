@@ -19,9 +19,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * <p>Java class for Dictionary complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Dictionary">
  *   &lt;complexContent>
@@ -85,11 +85,11 @@ public class Dictionary
 
     /**
      * Gets the value of the description property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDescription() {
         return description;
@@ -97,11 +97,11 @@ public class Dictionary
 
     /**
      * Sets the value of the description property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDescription(String value) {
         this.description = value;
@@ -109,25 +109,25 @@ public class Dictionary
 
     /**
      * Gets the value of the attributes property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the attributes property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAttributes().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Attribute }
-     * 
-     * 
+     *
+     *
      */
     public List<Attribute> getAttributes() {
         if (attributes == null) {
@@ -138,11 +138,11 @@ public class Dictionary
 
     /**
      * Gets the value of the fields property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Dictionary.Fields }
-     *     
+     *
      */
     public Dictionary.Fields getFields() {
         return fields;
@@ -150,11 +150,11 @@ public class Dictionary
 
     /**
      * Sets the value of the fields property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Dictionary.Fields }
-     *     
+     *
      */
     public void setFields(Dictionary.Fields value) {
         this.fields = value;
@@ -162,11 +162,11 @@ public class Dictionary
 
     /**
      * Gets the value of the messages property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Dictionary.Messages }
-     *     
+     *
      */
     public Dictionary.Messages getMessages() {
         return messages;
@@ -174,11 +174,11 @@ public class Dictionary
 
     /**
      * Sets the value of the messages property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Dictionary.Messages }
-     *     
+     *
      */
     public void setMessages(Dictionary.Messages value) {
         this.messages = value;
@@ -186,11 +186,11 @@ public class Dictionary
 
     /**
      * Gets the value of the name property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getName() {
         return name;
@@ -198,11 +198,11 @@ public class Dictionary
 
     /**
      * Sets the value of the name property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setName(String value) {
         this.name = value;
@@ -211,9 +211,9 @@ public class Dictionary
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -225,8 +225,8 @@ public class Dictionary
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
+     *
+     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
@@ -242,25 +242,25 @@ public class Dictionary
 
         /**
          * Gets the value of the fields property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the fields property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getFields().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Field }
-         * 
-         * 
+         *
+         *
          */
         public List<Field> getFields() {
             if (fields == null) {
@@ -274,9 +274,9 @@ public class Dictionary
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -288,8 +288,8 @@ public class Dictionary
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
+     *
+     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
@@ -305,25 +305,25 @@ public class Dictionary
 
         /**
          * Gets the value of the messages property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the messages property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getMessages().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Message }
-         * 
-         * 
+         *
+         *
          */
         public List<Message> getMessages() {
             if (messages == null) {
